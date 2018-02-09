@@ -6,8 +6,8 @@ class Connect4Test < ActiveSupport::TestCase
   end
 
   test "draws empty board" do
-    actual = Connect4.new(7, 6).render
+    connect = ConnectFour.new(7, 6)
     expected = "[ ][ ][ ][ ][ ][ ][ ]\n" * 6
-    assert_equal(expected, actual)
+    assert_equal(expected, connect.render)
   end
 end
