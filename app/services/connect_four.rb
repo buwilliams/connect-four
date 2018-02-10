@@ -1,5 +1,5 @@
 class ConnectFour
-  attr_accessor :width, :height, :board
+  attr_accessor :width, :height, :board, :turn
 
   PLAYER_ONE = 1
   PLAYER_TWO = 2
@@ -7,15 +7,28 @@ class ConnectFour
   def initialize(width, height)
     @width = width
     @height = height
-    @board = clean_board
+    reset
   end
 
-  def move(player, slot)
-    if player == PLAYER_ONE
-      @board[slot - 1] = 1
+  def reset
+    @board = clean_board
+    @turn = PLAYER_ONE
+  end
+
+  def move(slot)
+    index = open_index(slot)
+
+    return false if index == -1
+
+    if @turn == PLAYER_ONE
+      @turn = PLAYER_TWO
+      @board[index] = 1
     else
-      @board[slot - 1] = 2
+      @turn = PLAYER_ONE
+      @board[index] = 2
     end
+
+    return true
   end
 
   def render
@@ -44,5 +57,25 @@ class ConnectFour
 
   def clean_board
     Array.new(@width * @height, nil)
+  end
+
+  private
+
+  def open_index(slot)
+    index = -1
+    @height.times do |row|
+      check_index = row_slot_index(row, slot)
+      if @board[check_index].nil?
+        index = check_index
+        break
+      end
+    end
+    index
+  end
+
+  def row_slot_index(row, slot)
+    index = ((row + 1) * width) - width + slot - 1
+    return -1 if (index + 1) > @board.size
+    return index
   end
 end
