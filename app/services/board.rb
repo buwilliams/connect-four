@@ -83,6 +83,10 @@ class Board
     Array.new(@width * @height, nil)
   end
 
+  def won?
+    (detect_win()[0].nil?) ? false : true
+  end
+
   def detect_win
     (@board.size - 1).times do |index|
       next if @board[index].nil?
