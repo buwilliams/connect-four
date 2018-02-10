@@ -91,6 +91,7 @@ class Board
     WINS.keys.each do |key|
       result = players_and_coords(WINS[key], x, y)
       player = reduce_players(result[0])
+      #puts "Player: #{player}" unless player.nil?
       return [player, result[1]] if player == 1 or player == 2
     end
     return [nil, nil]

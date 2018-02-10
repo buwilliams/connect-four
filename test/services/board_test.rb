@@ -213,4 +213,27 @@ class BoardTest < ActiveSupport::TestCase
     assert_equal([1, 2], game[1][2])
     assert_equal([0, 3], game[1][3])
   end
+
+=begin
+  test "player one wins veritcal" do
+    #puts "player one wins veritcal"
+    game = [nil, nil]
+    c = Board.new(7, 6, ->(result){ game = result })
+    [1, 2, 1, 2, 1, 2, 1].each do |slot|
+      c.move(slot)
+    end
+    expected =  "[ ][ ][ ][ ][ ][ ][ ]\n"
+    expected += "[ ][ ][ ][ ][ ][ ][ ]\n"
+    expected += "[x][ ][ ][ ][ ][ ][ ]\n"
+    expected += "[x][o][ ][ ][ ][ ][ ]\n"
+    expected += "[x][o][ ][ ][ ][ ][ ]\n"
+    expected += "[x][o][ ][ ][ ][ ][ ]\n"
+    assert_equal(expected, c.render)
+    assert_equal(1, game[0])
+    assert_equal([0, 0], game[1][0])
+    assert_equal([0, 1], game[1][1])
+    assert_equal([0, 2], game[1][2])
+    assert_equal([0, 3], game[1][3])
+  end
+=end
 end
