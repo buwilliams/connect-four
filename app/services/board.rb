@@ -48,9 +48,7 @@ class Board
     end
 
     # detect draw
-    if @moves_made >= @width * @height
-      @game_over_callback.call [0, nil]
-    end
+    @game_over_callback.call [0, nil] if tie?
 
     return true
   end
@@ -85,6 +83,10 @@ class Board
 
   def won?
     (detect_win()[0].nil?) ? false : true
+  end
+
+  def tie?
+    (@moves_made >= @width * @height) ? true : false
   end
 
   def detect_win
