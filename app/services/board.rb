@@ -26,7 +26,7 @@ class Board
 
   def move(slot)
     x = slot - 1
-    index = open_index(x)
+    index = find_open_index(x)
 
     return false if index == -1
 
@@ -40,12 +40,20 @@ class Board
 
     @moves_made += 1
 
-    coords = coords_from_index(index)
-    result = win_result(coords[0], coords[1])
-    if result[0] != nil
-      @game_over_callback.call result
-    elsif @moves_made >= @width * @height
-      @game_over_callback.call [0, [0, 0, 0, 0]]
+    # detect win condition
+    (@board.size - 1).times do |index|
+      next if @board[index].nil?
+      coords = coords_from_index(index)
+      result = win_result(coords[0], coords[1])
+      if result[0] != nil
+        @game_over_callback.call result
+        return true
+      end
+    end
+
+    # detect draw
+    if @moves_made >= @width * @height
+      @game_over_callback.call [0, nil]
     end
 
     return true
@@ -79,32 +87,34 @@ class Board
     Array.new(@width * @height, nil)
   end
 
-  def moves_from_pattern(pattern, x, y)
-    moves = pattern.map do |coordinates|
-      new_x = x + coordinates[0]
-      new_y = y + coordinates[1]
-      index = index_from_coords(new_x, new_y)
-      if index == -1
-        next nil
-      else
-        next @board[index]
-      end
-    end
-    moves
-  end
-
   def win_result(x, y)
     WINS.keys.each do |key|
-      positions = moves_from_pattern(WINS[key], x, y)
-      reduced = reduce_positions(positions)
-      return [reduced, positions] if reduced == 1 or reduced == 2
+      result = players_and_coords(WINS[key], x, y)
+      player = reduce_players(result[0])
+      return [player, result[1]] if player == 1 or player == 2
     end
     return [nil, nil]
   end
 
+  def players_and_coords(pattern, x, y)
+    positions = []
+    moves = pattern.map do |coordinates|
+      new_x = x + coordinates[0]
+      new_y = y + coordinates[1]
+      positions << [new_x, new_y]
+      index = index_from_coords(new_x, new_y)
+      if index == -1
+        nil
+      else
+        @board[index]
+      end
+    end
+    [moves, positions]
+  end
+
   private
 
-  def open_index(x)
+  def find_open_index(x)
     index = -1
     return index if x > (@width - 1)
     @height.times do |row|
@@ -131,13 +141,13 @@ class Board
     return [x, y]
   end
 
-  def reduce_positions(positions)
+  def reduce_players(positions)
     positions.reduce(positions.first) do |result, current|
-      return nil if result.nil?
+      next nil if result.nil?
       if current == result
-        return current
+        next current
       else
-        return nil
+        next nil
       end
     end
   end

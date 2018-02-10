@@ -127,7 +127,7 @@ class BoardTest < ActiveSupport::TestCase
     expected += "[o][o][o][ ][ ][ ][ ]\n"
     expected += "[x][x][x][x][ ][ ][ ]\n"
     assert_equal(expected, c.render)
-    actual = c.moves_from_pattern(Board::WINS[:horizontal], 0, 0)
+    actual = c.players_and_coords(Board::WINS[:horizontal], 0, 0)[0]
     assert_equal([1, 1, 1, 1], actual)
   end
 
@@ -138,7 +138,7 @@ class BoardTest < ActiveSupport::TestCase
     end
     expected =  "[ ][ ][ ][ ][ ][ ][ ]\n" * 6
     assert_equal(expected, c.render)
-    actual = c.moves_from_pattern(Board::WINS[:horizontal], 0, 0)
+    actual = c.players_and_coords(Board::WINS[:horizontal], 0, 0)[0]
     assert_equal([nil, nil, nil, nil], actual)
   end
 
@@ -153,7 +153,7 @@ class BoardTest < ActiveSupport::TestCase
     expected += "[x][o][ ][ ][ ][ ][ ]\n"
     expected += "[x][o][ ][ ][ ][ ][ ]\n"
     assert_equal(expected, c.render)
-    actual = c.moves_from_pattern(Board::WINS[:vertical], 0, 0)
+    actual = c.players_and_coords(Board::WINS[:vertical], 0, 0)[0]
     assert_equal([1, 1, 1, 1], actual)
   end
 
@@ -169,7 +169,7 @@ class BoardTest < ActiveSupport::TestCase
     expected += "[o][x][x][o][ ][ ][ ]\n"
     expected += "[x][o][o][o][ ][ ][ ]\n"
     assert_equal(expected, c.render)
-    actual = c.moves_from_pattern(Board::WINS[:diaginal_right], 0, 0)
+    actual = c.players_and_coords(Board::WINS[:diaginal_right], 0, 0)[0]
     assert_equal([1, 1, 1, 1], actual)
   end
 
@@ -185,13 +185,17 @@ class BoardTest < ActiveSupport::TestCase
     expected += "[o][x][x][o][ ][ ][ ]\n"
     expected += "[o][o][o][x][ ][ ][ ]\n"
     assert_equal(expected, c.render)
-    actual = c.moves_from_pattern(Board::WINS[:diaginal_left], 3, 0)
-    assert_equal([1, 1, 1, 1], actual)
+    actual = c.players_and_coords(Board::WINS[:diaginal_left], 3, 0)
+    assert_equal([1, 1, 1, 1], actual[0])
+    assert_equal([3, 0], actual[1][0])
+    assert_equal([2, 1], actual[1][1])
+    assert_equal([1, 2], actual[1][2])
+    assert_equal([0, 3], actual[1][3])
   end
 
   test "detects win condition" do
-    player_won = nil
-    c = Board.new(7, 6, ->(result){ player_won = result[0] })
+    game = [nil, nil]
+    c = Board.new(7, 6, ->(result){ game = result })
     [4, 3, 3, 2, 2, 1, 2, 1, 1, 4].each do |slot|
       c.move(slot)
     end
@@ -203,8 +207,10 @@ class BoardTest < ActiveSupport::TestCase
     expected += "[o][x][x][o][ ][ ][ ]\n"
     expected += "[o][o][o][x][ ][ ][ ]\n"
     assert_equal(expected, c.render)
-    actual = c.moves_from_pattern(Board::WINS[:diaginal_left], 3, 0)
-    assert_equal([1, 1, 1, 1], actual)
-    assert_equal(1, player_won)
+    assert_equal(1, game[0])
+    assert_equal([3, 0], game[1][0])
+    assert_equal([2, 1], game[1][1])
+    assert_equal([1, 2], game[1][2])
+    assert_equal([0, 3], game[1][3])
   end
 end
