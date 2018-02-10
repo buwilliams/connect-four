@@ -41,14 +41,10 @@ class Board
     @moves_made += 1
 
     # detect win condition
-    (@board.size - 1).times do |index|
-      next if @board[index].nil?
-      coords = coords_from_index(index)
-      result = win_result(coords[0], coords[1])
-      if result[0] != nil
-        @game_over_callback.call result
-        return true
-      end
+    result = detect_win
+    if result[0] != nil
+      @game_over_callback.call result
+      return true
     end
 
     # detect draw
@@ -87,11 +83,22 @@ class Board
     Array.new(@width * @height, nil)
   end
 
-  def win_result(x, y)
+  def detect_win
+    (@board.size - 1).times do |index|
+      next if @board[index].nil?
+      coords = coords_from_index(index)
+      result = match_win_patterns(coords[0], coords[1])
+      if result[0] != nil
+        return result
+      end
+    end
+    return [nil, nil]
+  end
+
+  def match_win_patterns(x, y)
     WINS.keys.each do |key|
       result = players_and_coords(WINS[key], x, y)
       player = reduce_players(result[0])
-      #puts "Player: #{player}" unless player.nil?
       return [player, result[1]] if player == 1 or player == 2
     end
     return [nil, nil]
@@ -137,8 +144,8 @@ class Board
   def coords_from_index(index)
     return nil if index > (@board.size - 1)
     return nil if index < 0
-    x = (index + 1) % @width
-    y = (index + 1) / @width
+    x = (index + @width) % @width
+    y = ((index + @width) / @width) - 1
     return [x, y]
   end
 

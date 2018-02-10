@@ -5,10 +5,10 @@ terminal or play online. See the instructions below to get started.
 
 ## Playing Options
 
-- Level 1, PvP: `rails game:standard`
-- Level 2, PvC: `rails game:dumb`
+- Level 1, PvP: `rails game:classic`
+- Level 2, PvC: `rails game:easy`
 - Level 3, (PvP or PvC): (url goes here)
-- Bonus, (PvC, advanced AI): `rails game:expert`
+- Bonus, (PvC, advanced AI): `rails game:hard`
 
 ## Tests
 

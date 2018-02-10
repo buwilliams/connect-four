@@ -214,9 +214,7 @@ class BoardTest < ActiveSupport::TestCase
     assert_equal([0, 3], game[1][3])
   end
 
-=begin
   test "player one wins veritcal" do
-    #puts "player one wins veritcal"
     game = [nil, nil]
     c = Board.new(7, 6, ->(result){ game = result })
     [1, 2, 1, 2, 1, 2, 1].each do |slot|
@@ -235,5 +233,4 @@ class BoardTest < ActiveSupport::TestCase
     assert_equal([0, 2], game[1][2])
     assert_equal([0, 3], game[1][3])
   end
-=end
 end

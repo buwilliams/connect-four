@@ -19,7 +19,13 @@ class ConnectFour
       slot = STDIN.gets.chomp
       @board.move slot.to_i
     end
-    puts "#{@game[0]} #{@game[1]}"
-    puts "Game over. Player #{@game[0]} wins!!!"
+    20.times { puts }
+    puts "Connect Four"
+    puts "-" * @board.width * 3
+    @board.width.times { |n| print "(#{n+1})"}
+    puts
+    @board.paint
+    puts "-" * @board.width * 3
+    puts "Player #{@game[0]} wins!!!"
   end
 end
