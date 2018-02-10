@@ -23,7 +23,7 @@ terminal or play online. See the instructions below to get started.
 
   % rails test
 
-## Requirements
+## Project Goals
 
 - Level 1: Build a playable game of Connect 4 with 2 players, a command line
   interface being fine.  Should have player moves, win detection logic,
