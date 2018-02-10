@@ -106,7 +106,7 @@ class BoardTest < ActiveSupport::TestCase
 
   test "detects when there are no more moves" do
     no_moves = false
-    game_over = -> { no_moves = true }
+    game_over = ->(result) { no_moves = true }
     c = Board.new(7, 6, game_over)
     10.times { c.move(1) }
     10.times { c.move(2) }
@@ -187,5 +187,24 @@ class BoardTest < ActiveSupport::TestCase
     assert_equal(expected, c.render)
     actual = c.moves_from_pattern(Board::WINS[:diaginal_left], 3, 0)
     assert_equal([1, 1, 1, 1], actual)
+  end
+
+  test "detects win condition" do
+    player_won = nil
+    c = Board.new(7, 6, ->(result){ player_won = result[0] })
+    [4, 3, 3, 2, 2, 1, 2, 1, 1, 4].each do |slot|
+      c.move(slot)
+    end
+    c.move(1) # win condition
+    expected =  "[ ][ ][ ][ ][ ][ ][ ]\n"
+    expected += "[ ][ ][ ][ ][ ][ ][ ]\n"
+    expected += "[x][ ][ ][ ][ ][ ][ ]\n"
+    expected += "[x][x][ ][ ][ ][ ][ ]\n"
+    expected += "[o][x][x][o][ ][ ][ ]\n"
+    expected += "[o][o][o][x][ ][ ][ ]\n"
+    assert_equal(expected, c.render)
+    actual = c.moves_from_pattern(Board::WINS[:diaginal_left], 3, 0)
+    assert_equal([1, 1, 1, 1], actual)
+    assert_equal(1, player_won)
   end
 end

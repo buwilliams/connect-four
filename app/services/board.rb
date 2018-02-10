@@ -10,7 +10,7 @@ class Board
     diaginal_left:  [[0,0], [-1,1], [-2,2], [-3,3]]
   }
 
-  def initialize(width, height, game_over_callback=->{})
+  def initialize(width, height, game_over_callback=->(r){})
     @width = width
     @height = height
     @game_over_callback = game_over_callback
@@ -40,11 +40,12 @@ class Board
 
     @moves_made += 1
 
-    # TODO: check for four in a row
-
-    # check for draw
-    if @moves_made >= @width * @height
-      @game_over_callback.call
+    coords = coords_from_index(index)
+    result = win_result(coords[0], coords[1])
+    if result[0] != nil
+      @game_over_callback.call result
+    elsif @moves_made >= @width * @height
+      @game_over_callback.call [0, [0, 0, 0, 0]]
     end
 
     return true
@@ -79,12 +80,10 @@ class Board
   end
 
   def moves_from_pattern(pattern, x, y)
-    #puts "Pattern: #{pattern}"
     moves = pattern.map do |coordinates|
       new_x = x + coordinates[0]
       new_y = y + coordinates[1]
       index = index_from_coords(new_x, new_y)
-      #puts "Coords: #{coordinates}, Index: #{index}"
       if index == -1
         next nil
       else
@@ -94,15 +93,13 @@ class Board
     moves
   end
 
-  def win?(matches)
-    matched = moves.reduce(movies.first) do |result, current|
-      return nil if result.nil?
-      if current == result
-        return current
-      else
-        return nil
-      end
+  def win_result(x, y)
+    WINS.keys.each do |key|
+      positions = moves_from_pattern(WINS[key], x, y)
+      reduced = reduce_positions(positions)
+      return [reduced, positions] if reduced == 1 or reduced == 2
     end
+    return [nil, nil]
   end
 
   private
@@ -127,6 +124,21 @@ class Board
   end
 
   def coords_from_index(index)
-    # TODO
+    return nil if index > (@board.size - 1)
+    return nil if index < 0
+    x = (index + 1) % @width
+    y = (index + 1) / @width
+    return [x, y]
+  end
+
+  def reduce_positions(positions)
+    positions.reduce(positions.first) do |result, current|
+      return nil if result.nil?
+      if current == result
+        return current
+      else
+        return nil
+      end
+    end
   end
 end
