@@ -5,11 +5,11 @@ terminal or play online. See the instructions below to get started.
 
 ## Level 1 - Console
 
-  % rails game:standard
+- `rails game:standard`
 
 ## Level 2 - Dumb AI
 
-  % rails game:dumb
+- `rails game:dumb`
 
 ## Level 3 - Heroku / SPA
 
@@ -17,11 +17,11 @@ terminal or play online. See the instructions below to get started.
 
 ## Boss Level - Advanced AI
 
-  % rails game:expert
+- `rails game:expert`
 
 ## Running Tests
 
-  % rails test
+- `rails test`
 
 ## Project Goals
 
