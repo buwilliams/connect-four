@@ -188,24 +188,4 @@ class BoardTest < ActiveSupport::TestCase
     actual = c.moves_from_pattern(Board::WINS[:diaginal_left], 3, 0)
     assert_equal([1, 1, 1, 1], actual)
   end
-
-=begin
-  test "detects vertical four in a row" do
-    game_won = false
-    game_over = -> { game_won = true }
-    c = Board.new(7, 6, game_over)
-    4.times {
-      c.move(1)
-      c.move(2)
-    }
-    expected =  "[ ][ ][ ][ ][ ][ ][ ]\n"
-    expected += "[ ][ ][ ][ ][ ][ ][ ]\n"
-    expected += "[x][ ][ ][ ][ ][ ][ ]\n"
-    expected += "[x][o][ ][ ][ ][ ][ ]\n"
-    expected += "[x][o][ ][ ][ ][ ][ ]\n"
-    expected += "[x][o][ ][ ][ ][ ][ ]\n"
-    assert_equal(expected, c.render)
-    #assert_equal(game_won, true)
-  end
-=end
 end

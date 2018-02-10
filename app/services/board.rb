@@ -31,11 +31,11 @@ class Board
     return false if index == -1
 
     if @turn == PLAYER_ONE
-      @turn = PLAYER_TWO
       @board[index] = 1
+      @turn = PLAYER_TWO
     else
-      @turn = PLAYER_ONE
       @board[index] = 2
+      @turn = PLAYER_ONE
     end
 
     @moves_made += 1
