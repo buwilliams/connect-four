@@ -110,6 +110,8 @@ class Board
     return [nil, nil]
   end
 
+  # not a private method since I'm using this
+  # in the tests
   def players_and_coords(pattern, x, y)
     positions = []
     moves = pattern.map do |coordinates|
