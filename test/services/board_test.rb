@@ -157,7 +157,7 @@ class BoardTest < ActiveSupport::TestCase
     assert_equal([1, 1, 1, 1], actual)
   end
 
-  test "detects diaginal right win pattern" do
+  test "detects diagonal right win pattern" do
     c = Board.new(7, 6)
     [1, 2, 2, 3, 3, 4, 3, 4, 4, 1, 4].each do |slot|
       c.move(slot)
@@ -169,11 +169,11 @@ class BoardTest < ActiveSupport::TestCase
     expected += "[o][x][x][o][ ][ ][ ]\n"
     expected += "[x][o][o][o][ ][ ][ ]\n"
     assert_equal(expected, c.render)
-    actual = c.players_and_coords(Board::WINS[:diaginal_right], 0, 0)[0]
+    actual = c.players_and_coords(Board::WINS[:diagonal_right], 0, 0)[0]
     assert_equal([1, 1, 1, 1], actual)
   end
 
-  test "detects diaginal left win pattern" do
+  test "detects diagonal left win pattern" do
     c = Board.new(7, 6)
     [4, 3, 3, 2, 2, 1, 2, 1, 1, 4, 1].each do |slot|
       c.move(slot)
@@ -185,7 +185,7 @@ class BoardTest < ActiveSupport::TestCase
     expected += "[o][x][x][o][ ][ ][ ]\n"
     expected += "[o][o][o][x][ ][ ][ ]\n"
     assert_equal(expected, c.render)
-    actual = c.players_and_coords(Board::WINS[:diaginal_left], 3, 0)
+    actual = c.players_and_coords(Board::WINS[:diagonal_left], 3, 0)
     assert_equal([1, 1, 1, 1], actual[0])
     assert_equal([3, 0], actual[1][0])
     assert_equal([2, 1], actual[1][1])

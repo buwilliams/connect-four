@@ -6,8 +6,8 @@ class Board
   WINS = {
     horizontal:     [[0,0], [1,0], [2,0], [3,0]],
     vertical:       [[0,0], [0,1], [0,2], [0,3]],
-    diaginal_right: [[0,0], [1,1], [2,2], [3,3]],
-    diaginal_left:  [[0,0], [-1,1], [-2,2], [-3,3]]
+    diagonal_right: [[0,0], [1,1], [2,2], [3,3]],
+    diagonal_left:  [[0,0], [-1,1], [-2,2], [-3,3]]
   }
 
   def initialize(width, height, game_over_callback=->(r){})
