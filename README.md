@@ -3,23 +3,14 @@
 The classic game we grew up playing in the US. You can play either from the
 terminal or play online. See the instructions below to get started.
 
-## Level 1 - Console
+## Playing Options
 
-- `rails game:standard`
+- Level 1, PvP: `rails game:standard`
+- Level 2, PvC: `rails game:dumb`
+- Level 3, (PvP or PvC): (url goes here)
+- Bonus, (PvC, advanced AI): `rails game:expert`
 
-## Level 2 - Dumb AI
-
-- `rails game:dumb`
-
-## Level 3 - Heroku / SPA
-
-- (url goes here)
-
-## Boss Level - Advanced AI
-
-- `rails game:expert`
-
-## Running Tests
+## Tests
 
 - `rails test`
 
