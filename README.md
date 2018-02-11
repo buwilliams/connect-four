@@ -1,18 +1,58 @@
 # Connect Four on Rails
 
-The classic game we grew up playing in the US. You can play either from the
-terminal or play online. See the instructions below to get started.
+Connect Four playable online or from the console. All code was hand written so
+the Minimax algorithm is a little buggy and slow.
 
-## Playing Options
+## Web Version
 
-- Level 1, PvP: `rails game:classic`
-- Level 2, PvC: `rails game:easy`
-- Level 3, (PvP or PvC): (url goes here)
-- Bonus, (PvC, advanced AI): `rails game:hard`
+![Web Connect Four](https://buddy-connect-four.herokuapp.com/web.png)
 
-## Tests
+[Play Connect Four on Heroku](http://buddy-connect-four.herokuapp.com)
 
-- `rails test`
+You can swap the mode you are playing in any time using the select. This allow
+you to play as PvP for a few moves and then let the AI take over after your
+next turn.
+
+## Console Version
+
+![Console Connect Four](https://buddy-connect-four.herokuapp.com/console.png)
+
+To play in the console:
+
+- `rails game:classic` Player vs. Player
+- `rails game:easy` Player vs. AI (Random)
+- `rails game:moderate` Player vs. AI ()
+- `rails game:hard` Player vs. AI (Random)
+
+You can setup a board by sending in a list of play on the first move. For example,
+you can paste `[1, 2, 1, 2, 1, 2, 1]` into any move to play those moves.
+
+## Developer Guide
+
+- Remember to run `bundle`
+- Run test suite by `rails test`
+
+## Unfinished
+
+- Persist games to database
+- Generate a large sample size of games to test AI again
+
+## Known Bugs
+
+- Web: UI randomly switches players when in AI mode
+- Web: height of board is larger than needed
+- AI: hard AI occasionally misses obvious blocks
+- AI: implementation of algorithm is slow
+
+## Resources
+
+- [Wikipedia Connect Four](https://en.wikipedia.org/wiki/Connect_Four)
+- [MIT Lecture: Games, Minimax, and Alpha-Beta](https://www.youtube.com/watch?v=STjW3eH0Cik)
+- [Minimax Algorithm](https://en.wikipedia.org/wiki/Minimax)
+- [Alpha-beta Pruning Variation](https://en.wikipedia.org/wiki/Alpha%E2%80%93beta_pruning)
+- [Negamax Variation](https://en.wikipedia.org/wiki/Negamax)
+- [Connect Four Example and Tutorial in C++](http://connect4.gamesolver.org/)
+- [Connect Four in JavaScript](https://www.roadtolarissa.com/javascript/connect-4-AI/)
 
 ## Project Goals
 
