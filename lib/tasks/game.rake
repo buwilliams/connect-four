@@ -4,4 +4,10 @@ namespace :game do
     c = ConnectFour.new(7, 6)
     c.play
   end
+
+  task easy: :environment do
+    ai = BasicAi.new
+    c = ConnectFour.new(7, 6, ai)
+    c.play
+  end
 end

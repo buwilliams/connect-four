@@ -1,5 +1,5 @@
 class Board
-  attr_accessor :width, :height, :board, :turn
+  attr_accessor :width, :height, :board, :turn, :moves_made
 
   PLAYER_ONE = 1
   PLAYER_TWO = 2
@@ -82,6 +82,10 @@ class Board
 
   def clean_board
     Array.new(@width * @height, nil)
+  end
+
+  def game_over?
+    won? or tie?
   end
 
   def won?
