@@ -14,17 +14,17 @@ class Board
     @width = width
     @height = height
     @game_over_callback = game_over_callback
-    reset
+    reset_board
   end
 
-  def reset
+  def reset_board
     @board = clean_board
     @turn = PLAYER_ONE
     @moves_made = 0
     @game_over = false
   end
 
-  def move(slot)
+  def move(slot, skip_detection=false)
     x = slot - 1
     index = find_open_index(x)
 
@@ -39,6 +39,9 @@ class Board
     end
 
     @moves_made += 1
+
+    # save some cycles
+    return true if skip_detection
 
     # detect win condition
     result = detect_win
@@ -126,6 +129,15 @@ class Board
       end
     end
     [moves, positions]
+  end
+
+  def available_moves
+    moves = []
+    @width.times do |x|
+      index = find_open_index x
+      moves << (x + 1) unless index == -1
+    end
+    moves
   end
 
   private

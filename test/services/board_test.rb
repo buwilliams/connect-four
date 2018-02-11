@@ -233,4 +233,19 @@ class BoardTest < ActiveSupport::TestCase
     assert_equal([0, 2], game[1][2])
     assert_equal([0, 3], game[1][3])
   end
+
+  test "returns all slots on a empty board" do
+    c = Board.new(7, 6)
+    assert_equal([1, 2, 3, 4, 5, 6, 7], c.available_moves)
+  end
+
+  test "returns all slots with two full columns" do
+    c = Board.new(7, 6)
+    6.times do
+      c.move(1, true)
+      c.move(4, true)
+      c.move(5, true)
+    end
+    assert_equal([2, 3, 6, 7], c.available_moves)
+  end
 end
