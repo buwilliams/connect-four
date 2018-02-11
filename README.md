@@ -1,7 +1,6 @@
 # Connect Four on Rails
 
-Connect Four playable online or from the console. All code was hand written so
-the Minimax algorithm is a little buggy and slow.
+Connect Four playable online or from the console. 
 
 ## Web Version
 
