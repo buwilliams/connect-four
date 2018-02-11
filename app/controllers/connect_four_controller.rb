@@ -1,0 +1,2 @@
+class ConnectFourController < ApplicationController
+end

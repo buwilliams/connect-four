@@ -1,0 +1,118 @@
+css:
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
+  h1 {
+    font-size: 2em;
+  }
+
+  .board-container {
+    position: relative;
+    margin: 10px auto 0 auto;
+    width: calc(90vh);
+    height: calc(90vh);
+  }
+
+  .board {
+    border: solid 1px #ccc;
+    width: 90%;
+    height: 90%;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .col {
+    display: flex;
+    flex-direction: column-reverse;
+    width: calc(100% / 7);
+    background-color: #ccc;
+  }
+
+  .col:hover {
+    background-color: #aaa;
+  }
+
+  .chip {
+    width: 100%;
+    height: calc(100% / 7);
+    border-radius: calc(100% / 2);
+  }
+
+  .red { background-color: red; }
+  .yellow { background-color: yellow; }
+  .g1 { background-color: #ccc; }
+  .g2 { background-color: #ddd; }
+
+#game.board-container
+  h1 Connect Four
+  div.board
+    div.col.g1 @click="makeMove(1)"
+      template v-for="chip in getChips(1)"
+        div.chip.red v-if="chip === 1"
+        div.chip.yellow v-if="chip === 2"
+    div.col.g2 @click="makeMove(2)"
+      template v-for="chip in getChips(2)"
+        div.chip.red v-if="chip === 1"
+        div.chip.yellow v-if="chip === 2"
+    div.col.g1 @click="makeMove(3)"
+      template v-for="chip in getChips(3)"
+        div.chip.red v-if="chip === 1"
+        div.chip.yellow v-if="chip === 2"
+    div.col.g2 @click="makeMove(4)"
+      template v-for="chip in getChips(4)"
+        div.chip.red v-if="chip === 1"
+        div.chip.yellow v-if="chip === 2"
+    div.col.g1 @click="makeMove(5)"
+      template v-for="chip in getChips(5)"
+        div.chip.red v-if="chip === 1"
+        div.chip.yellow v-if="chip === 2"
+    div.col.g2 @click="makeMove(6)"
+      template v-for="chip in getChips(6)"
+        div.chip.red v-if="chip === 1"
+        div.chip.yellow v-if="chip === 2"
+    div.col.g1 @click="makeMove(7)"
+      template v-for="chip in getChips(7)"
+        div.chip.red v-if="chip === 1"
+        div.chip.yellow v-if="chip === 2"
+
+javascript:
+  new Vue({
+    el: '#game',
+
+    data: {
+      game_type: 1,
+      plays: []
+    },
+
+    created: function() {
+      // TODO: get game from server
+    },
+
+    methods: {
+      getChips: function(slot) {
+        var playerOne = true
+        var out = []
+
+        this.plays.forEach(function(play) {
+          if(play == slot && playerOne) {
+            out.push(1)
+          } else if(play == slot && !playerOne) {
+            out.push(2)
+          }
+          playerOne = !playerOne
+        })
+
+        return out
+      },
+
+      makeMove: function(slot) {
+        alert('making move at' + slot)
+      }
+    }
+  })
