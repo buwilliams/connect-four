@@ -3,6 +3,15 @@ css:
     box-sizing: border-box;
   }
 
+  [v-cloak] > * { display:none; }
+  [v-cloak]::before {
+    content: " ";
+    display: block;
+    width: 16px;
+    height: 16px;
+    background-image: url('data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==');
+  }
+
   body {
     margin: 0;
     padding: 0;
@@ -15,20 +24,23 @@ css:
   .board-container {
     position: relative;
     margin: 10px auto 0 auto;
-    width: calc(90vh);
-    height: calc(90vh);
+    width: calc(70vh);
+    height: calc(70vh);
   }
 
   .board {
     position: relative;
     cursor: pointer;
     margin-top: 1em;
-    border: solid 1px #ccc;
-    width: 90%;
-    height: 90%;
+    border: solid 5px #333;
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: row;
   }
+
+  .board.red { border-color: red; }
+  .board.yellow { border-color: yellow; }
 
   .shadow {
     position: absolute;
@@ -38,6 +50,7 @@ css:
     font-size: 1.5em;
     padding: 1em;
     text-align: center;
+    z-index: 1000;
   }
 
   .col {
@@ -68,8 +81,8 @@ css:
     option value="0" Player vs Player
     option value="1" Player vs Easy AI
     option value="2" Player vs Moderate AI
-    option value="3" Player vs Hard AI
-  .board
+    option value="4" Player vs Hard AI
+  div :class="boardClass()"
     .shadow v-if="game_over === true" @click="startOver()"
       h1 Game Over
       p v-if="winner === 0"
@@ -117,7 +130,8 @@ javascript:
       game_mode: 0,
       game_over: false,
       moves: [],
-      winner: null
+      winner: null,
+      turn: 1
     },
 
     created: function() {},
@@ -143,6 +157,12 @@ javascript:
         var that = this
         this.moves.push(slot)
 
+        if(this.turn === 1) {
+          this.turn = 2
+        } else {
+          this.turn = 1
+        }
+
         postData('/move', {
           width: this.width,
           height: this.height,
@@ -164,6 +184,15 @@ javascript:
         this.moves.splice(0, this.moves.length)
         this.game_over = false
         this.winner = null
+        this.turn = 1
+      },
+
+      boardClass: function() {
+        if(this.turn === 1) {
+          return { 'board red': true}
+        } else {
+          return { 'board yellow': true}
+        }
       }
     }
   })

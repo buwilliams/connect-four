@@ -12,6 +12,14 @@ class ConnectFourController < ApplicationController
     b.auto_move(moves)
 
     win_results = b.detect_win
+
+    # Game mode is AI
+    if game_mode > 0 && win_results[0].nil?
+      ai = BasicAi.new (game_mode - 1)
+      b.move ai.move(b)
+      win_results = b.detect_win
+    end
+
     game_over = (!win_results[0].nil? or b.tie?) ? true : false
 
     render json: {
