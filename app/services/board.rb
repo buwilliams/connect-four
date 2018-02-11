@@ -1,5 +1,5 @@
 class Board
-  attr_accessor :width, :height, :board, :turn, :moves_made
+  attr_accessor :width, :height, :board, :turn, :moves_made, :all_moves
 
   PLAYER_ONE = 1
   PLAYER_TWO = 2
@@ -14,6 +14,7 @@ class Board
     @width = width
     @height = height
     @game_over_callback = game_over_callback
+    @all_moves = []
     reset_board
   end
 
@@ -38,6 +39,7 @@ class Board
       @turn = PLAYER_ONE
     end
 
+    @all_moves << slot
     @moves_made += 1
 
     # save some cycles
@@ -142,6 +144,10 @@ class Board
       moves << (x + 1) unless index == -1
     end
     moves
+  end
+
+  def auto_move(moves)
+    moves.each { |m| move(m) }
   end
 
   private

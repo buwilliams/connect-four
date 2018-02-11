@@ -21,8 +21,7 @@ class ConnectFour
       @board.paint
       puts "-" * @board.width * 3
       print "Player #{@board.turn}'s turn: "
-      slot = get_move
-      @board.move slot.to_i
+      move_player
     end
     20.times { puts }
     puts "Connect Four"
@@ -31,10 +30,12 @@ class ConnectFour
     puts
     @board.paint
     puts "-" * @board.width * 3
+    puts "Moves: #{@board.all_moves}"
+    puts "Result: #{@game[1]}"
     puts "Player #{@game[0]} wins!!!"
   end
 
-  def get_move
+  def move_player
     if @board.turn == Board::PLAYER_ONE and @is_ai_first == true
       ai_move
     elsif @board.turn == Board::PLAYER_TWO and !@ai_player.nil?
@@ -46,10 +47,17 @@ class ConnectFour
 
   def human_move
     m = STDIN.gets.chomp
-    m.to_i
+    if m[0] == '['
+      m[1..-2].split(',').each do |m|
+        puts "Auto playing: #{m.to_i}"
+        @board.move m.to_i
+      end
+    else
+      @board.move m.to_i
+    end
   end
 
   def ai_move
-    @ai_player.move(@board)
+    @board.move @ai_player.move(@board).to_i
   end
 end
