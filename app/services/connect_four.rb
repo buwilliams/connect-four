@@ -31,7 +31,7 @@ class ConnectFour
     @board.paint
     puts "-" * @board.width * 3
     puts "Moves: #{@board.all_moves}"
-    puts "Result: #{@game[1]}"
+    puts "Coords for win: #{@game[1]}"
     puts "Player #{@game[0]} wins!!!"
   end
 

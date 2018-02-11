@@ -112,7 +112,7 @@ class Board
 
   def match_win_patterns(x, y)
     WINS.keys.each do |key|
-      result = players_and_coords(WINS[key], x, y)
+      result = match_pattern(WINS[key], x, y)
       player = reduce_players(result[0])
       return [player, result[1]] if player == 1 or player == 2
     end
@@ -121,12 +121,12 @@ class Board
 
   # not a private method since I'm using this
   # in the tests
-  def players_and_coords(pattern, x, y)
-    positions = []
-    moves = pattern.map do |coordinates|
+  def match_pattern(pattern, x, y)
+    coords = []
+    players = pattern.map do |coordinates|
       new_x = x + coordinates[0]
       new_y = y + coordinates[1]
-      positions << [new_x, new_y]
+      coords << [new_x, new_y]
       index = index_from_coords(new_x, new_y)
       if index == -1
         nil
@@ -134,7 +134,7 @@ class Board
         @board[index]
       end
     end
-    [moves, positions]
+    [players, coords]
   end
 
   def available_moves
@@ -166,8 +166,9 @@ class Board
   end
 
   def index_from_coords(x, y)
+    return -1 if x > (@width - 1) or x < 0 or y > (@height - 1) or y < 0
     index = ((y + 1) * width) - width + x
-    return -1 if (index + 1) > @board.size
+    #return -1 if (index + 1) > @board.size
     return index
   end
 

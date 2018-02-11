@@ -127,7 +127,7 @@ class BoardTest < ActiveSupport::TestCase
     expected += "[o][o][o][ ][ ][ ][ ]\n"
     expected += "[x][x][x][x][ ][ ][ ]\n"
     assert_equal(expected, c.render)
-    actual = c.players_and_coords(Board::WINS[:horizontal], 0, 0)[0]
+    actual = c.match_pattern(Board::WINS[:horizontal], 0, 0)[0]
     assert_equal([1, 1, 1, 1], actual)
   end
 
@@ -138,7 +138,7 @@ class BoardTest < ActiveSupport::TestCase
     end
     expected =  "[ ][ ][ ][ ][ ][ ][ ]\n" * 6
     assert_equal(expected, c.render)
-    actual = c.players_and_coords(Board::WINS[:horizontal], 0, 0)[0]
+    actual = c.match_pattern(Board::WINS[:horizontal], 0, 0)[0]
     assert_equal([nil, nil, nil, nil], actual)
   end
 
@@ -153,7 +153,7 @@ class BoardTest < ActiveSupport::TestCase
     expected += "[x][o][ ][ ][ ][ ][ ]\n"
     expected += "[x][o][ ][ ][ ][ ][ ]\n"
     assert_equal(expected, c.render)
-    actual = c.players_and_coords(Board::WINS[:vertical], 0, 0)[0]
+    actual = c.match_pattern(Board::WINS[:vertical], 0, 0)[0]
     assert_equal([1, 1, 1, 1], actual)
   end
 
@@ -169,7 +169,7 @@ class BoardTest < ActiveSupport::TestCase
     expected += "[o][x][x][o][ ][ ][ ]\n"
     expected += "[x][o][o][o][ ][ ][ ]\n"
     assert_equal(expected, c.render)
-    actual = c.players_and_coords(Board::WINS[:diagonal_right], 0, 0)[0]
+    actual = c.match_pattern(Board::WINS[:diagonal_right], 0, 0)[0]
     assert_equal([1, 1, 1, 1], actual)
   end
 
@@ -185,12 +185,27 @@ class BoardTest < ActiveSupport::TestCase
     expected += "[o][x][x][o][ ][ ][ ]\n"
     expected += "[o][o][o][x][ ][ ][ ]\n"
     assert_equal(expected, c.render)
-    actual = c.players_and_coords(Board::WINS[:diagonal_left], 3, 0)
+    actual = c.match_pattern(Board::WINS[:diagonal_left], 3, 0)
     assert_equal([1, 1, 1, 1], actual[0])
     assert_equal([3, 0], actual[1][0])
     assert_equal([2, 1], actual[1][1])
     assert_equal([1, 2], actual[1][2])
     assert_equal([0, 3], actual[1][3])
+  end
+
+  test "does not detects diagonal right win pattern off screen" do
+    c = Board.new(7, 6)
+    c.auto_move([6, 7, 7])
+    expected =  "[ ][ ][ ][ ][ ][ ][ ]\n"
+    expected += "[ ][ ][ ][ ][ ][ ][ ]\n"
+    expected += "[ ][ ][ ][ ][ ][ ][ ]\n"
+    expected += "[ ][ ][ ][ ][ ][ ][ ]\n"
+    expected += "[ ][ ][ ][ ][ ][ ][x]\n"
+    expected += "[ ][ ][ ][ ][ ][x][o]\n"
+    assert_equal(expected, c.render)
+    actual = c.match_pattern(Board::WINS[:diagonal_right], 5, 0)
+    assert_equal([1, 1, nil, nil], actual[0])
+    assert_nil(c.match_win_patterns(5, 0)[0])
   end
 
   test "detects win condition" do
