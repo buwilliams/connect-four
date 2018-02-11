@@ -10,4 +10,16 @@ namespace :game do
     c = ConnectFour.new(7, 6, ai)
     c.play
   end
+
+  task moderate: :environment do
+    ai = BasicAi.new 2
+    c = ConnectFour.new(7, 6, ai)
+    c.play
+  end
+
+  task hard: :environment do
+    ai = BasicAi.new 4
+    c = ConnectFour.new(7, 6, ai)
+    c.play
+  end
 end

@@ -93,7 +93,7 @@ class Board
   end
 
   def tie?
-    (@moves_made >= @width * @height) ? true : false
+    (@moves_made >= (@width * @height) and won? == false) ? true : false
   end
 
   def detect_win

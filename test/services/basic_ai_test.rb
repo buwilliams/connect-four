@@ -23,4 +23,48 @@ class BasicAiTest < ActiveSupport::TestCase
     assert_equal(42, b.moves_made)
     assert_equal(true, b.game_over?)
   end
+
+  test "AI makes winning move as player1 depth of 1" do
+    b = Board.new(7, 6)
+    p1 = BasicAi.new 1
+    3.times { b.move(1); b.move(2) }
+    b.move p1.move(b)
+    expected =  "[ ][ ][ ][ ][ ][ ][ ]\n" * 2
+    expected += "[x][ ][ ][ ][ ][ ][ ]\n"
+    expected += "[x][o][ ][ ][ ][ ][ ]\n"
+    expected += "[x][o][ ][ ][ ][ ][ ]\n"
+    expected += "[x][o][ ][ ][ ][ ][ ]\n"
+    assert_equal(expected, b.render)
+    assert_equal(true, b.won?)
+  end
+
+  test "AI makes winning move as player2 depth of 1" do
+    b = Board.new(7, 6)
+    p2 = BasicAi.new 1
+    3.times { b.move(1); b.move(2) }
+    b.move 3
+    b.move p2.move(b)
+    expected =  "[ ][ ][ ][ ][ ][ ][ ]\n" * 2
+    expected += "[ ][o][ ][ ][ ][ ][ ]\n"
+    expected += "[x][o][ ][ ][ ][ ][ ]\n"
+    expected += "[x][o][ ][ ][ ][ ][ ]\n"
+    expected += "[x][o][x][ ][ ][ ][ ]\n"
+    assert_equal(expected, b.render)
+    assert_equal(true, b.won?)
+  end
+
+  test "AI makes prevents winning move as player 2 depth of 1" do
+    b = Board.new(7, 6)
+    p2 = BasicAi.new 2
+    2.times { b.move(1); b.move(2) }
+    b.move 1
+    b.move p2.move(b)
+    expected =  "[ ][ ][ ][ ][ ][ ][ ]\n" * 2
+    expected += "[o][ ][ ][ ][ ][ ][ ]\n"
+    expected += "[x][ ][ ][ ][ ][ ][ ]\n"
+    expected += "[x][o][ ][ ][ ][ ][ ]\n"
+    expected += "[x][o][ ][ ][ ][ ][ ]\n"
+    assert_equal(expected, b.render)
+    assert_equal(false, b.won?)
+  end
 end
