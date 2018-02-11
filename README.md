@@ -1,6 +1,6 @@
 # Connect Four on Rails
 
-Connect Four playable online or from the console. 
+Connect Four playable online or from the console.
 
 ## Web Version
 
@@ -20,8 +20,8 @@ To play in the console:
 
 - `rails game:classic` Player vs. Player
 - `rails game:easy` Player vs. AI (Random)
-- `rails game:moderate` Player vs. AI ()
-- `rails game:hard` Player vs. AI (Random)
+- `rails game:moderate` Player vs. AI (Depth=2)
+- `rails game:hard` Player vs. AI (Depth=3)
 
 You can setup a board by sending in a list of play on the first move. For example,
 you can paste `[1, 2, 1, 2, 1, 2, 1]` into any move to play those moves.
