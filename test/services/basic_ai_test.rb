@@ -53,7 +53,7 @@ class BasicAiTest < ActiveSupport::TestCase
     assert_equal(true, b.won?)
   end
 
-  test "AI makes prevents winning move as player 2 depth of 1" do
+  test "AI prevents winning move as player 2 depth of 2" do
     b = Board.new(7, 6)
     p2 = BasicAi.new 2
     2.times { b.move(1); b.move(2) }
