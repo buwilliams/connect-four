@@ -168,7 +168,6 @@ class Board
   def index_from_coords(x, y)
     return -1 if x > (@width - 1) or x < 0 or y > (@height - 1) or y < 0
     index = ((y + 1) * width) - width + x
-    #return -1 if (index + 1) > @board.size
     return index
   end
 
