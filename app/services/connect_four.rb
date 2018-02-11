@@ -13,7 +13,7 @@ class ConnectFour
 
   def play
     while @game[0] == nil
-      20.times { puts }
+      clear_screen
       puts "Connect Four"
       puts "-" * @board.width * 3
       @board.width.times { |n| print "(#{n+1})"}
@@ -23,7 +23,7 @@ class ConnectFour
       print "Player #{@board.turn}'s turn: "
       move_player
     end
-    20.times { puts }
+    clear_screen
     puts "Connect Four"
     puts "-" * @board.width * 3
     @board.width.times { |n| print "(#{n+1})"}
@@ -59,5 +59,9 @@ class ConnectFour
 
   def ai_move
     @board.move @ai_player.move(@board).to_i
+  end
+
+  def clear_screen
+    40.times { puts }
   end
 end
