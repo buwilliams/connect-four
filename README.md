@@ -34,13 +34,13 @@ you can paste `[1, 2, 1, 2, 1, 2, 1]` into any move to play those moves.
 
 Interesting code lives:
 
-- [Board](blob/master/app/services/board.rb)
-- [BasicAi](blob/master/app/services/basic_ai.rb)
-- [ConnectFour Console](blob/master/app/services/connect_four.rb)
-- [Rake Game Task](blob/master/lib/tasks/game.rake)
-- [Connect Four Controller](blob/master/app/controllers/connect_four_controller.rb)
-- [Connect Four in Vue.js](blob/master/app/views/connect_four/index.html.slim)
-- [Tests](tree/master/test/services)
+- [Board](app/services/board.rb)
+- [BasicAi](app/services/basic_ai.rb)
+- [ConnectFour Console](app/services/connect_four.rb)
+- [Rake Game Task](lib/tasks/game.rake)
+- [Connect Four Controller](app/controllers/connect_four_controller.rb)
+- [Connect Four in Vue.js](app/views/connect_four/index.html.slim)
+- [Tests](test/services)
 
 ## Unfinished
 
