@@ -30,6 +30,17 @@ you can paste `[1, 2, 1, 2, 1, 2, 1]` into any move to play those moves.
 
 - Remember to run `bundle`
 - Run test suite by `rails test`
+- Start server by `rails s`
+
+Interesting code lives:
+
+- [Board](blob/master/app/services/board.rb)
+- [BasicAi](blob/master/app/services/basic_ai.rb)
+- [ConnectFour Console](blob/master/app/services/connect_four.rb)
+- [Rake Game Task](blob/master/lib/tasks/game.rake)
+- [Connect Four Controller](blob/master/app/controllers/connect_four_controller.rb)
+- [Connect Four in Vue.js](blob/master/app/views/connect_four/index.html.slim)
+- [Tests](tree/master/test/services)
 
 ## Unfinished
 
