@@ -1,10 +1,6 @@
 require 'test_helper'
 
 class BoardTest < ActiveSupport::TestCase
-  test "true equals true" do
-    assert true
-  end
-
   test "draws empty board" do
     c = Board.new(7, 6)
     expected = "[ ][ ][ ][ ][ ][ ][ ]\n" * 6
