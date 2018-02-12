@@ -204,7 +204,11 @@ javascript:
           // set winner and game over
           that.winner = data.winner
           that.game_over = data.game_over
-          that.turn = data.current_players_turn
+          if(data.game_over === true) {
+            that.turn = data.winner
+          } else {
+            that.turn = data.current_players_turn
+          }
         })
       },
 
