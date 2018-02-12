@@ -4,7 +4,7 @@ Connect Four playable online or from the console.
 
 ## Web Version
 
-![Web Connect Four](https://buddy-connect-four.herokuapp.com/web.png)
+![Web Connect Four](https://buddy-connect-four.herokuapp.com/web.png?v=1)
 
 [Play Connect Four on Heroku](http://buddy-connect-four.herokuapp.com)
 
@@ -14,7 +14,7 @@ next turn.
 
 ## Console Version
 
-![Console Connect Four](https://buddy-connect-four.herokuapp.com/console.png)
+![Console Connect Four](https://buddy-connect-four.herokuapp.com/console.png?v=1)
 
 To play in the console:
 
