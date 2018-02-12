@@ -34,14 +34,11 @@ you can paste `[1, 2, 1, 2, 1, 2, 1]` into any move to play those moves.
 ## Unfinished
 
 - Persist games to database
-- Generate a large sample size of games to test AI again
 
 ## Known Bugs
 
-- Web: UI randomly switches players when in AI mode
-- Web: height of board is larger than needed
 - AI: hard AI occasionally misses obvious blocks
-- AI: implementation of algorithm is slow
+- AI: implementation of algorithm is slow, using pruning
 
 ## Resources
 
