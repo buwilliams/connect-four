@@ -62,6 +62,15 @@ css:
     border-radius: calc(100% / 2);
   }
 
+  .chip-shadow {
+    display: none;
+    opacity: .2;
+  }
+
+  .col:hover .chip-shadow {
+    display: block
+  }
+
   .red { color: white; background-color: red; }
   .yellow { color: black; background-color: yellow; }
   .g1 { background-color: #ccc; }
@@ -86,30 +95,44 @@ css:
       template v-for="chip in getChips(1)"
         .chip.red v-if="chip === 1"
         .chip.yellow v-if="chip === 2"
+      .chip.chip-shadow.red v-if="turn === 1"
+      .chip.chip-shadow.yellow v-if="turn === 2"
     .col.g2 @click="makeMove(2)"
       template v-for="chip in getChips(2)"
         .chip.red v-if="chip === 1"
         .chip.yellow v-if="chip === 2"
+      .chip.chip-shadow.red v-if="turn === 1"
+      .chip.chip-shadow.yellow v-if="turn === 2"
     .col.g1 @click="makeMove(3)"
       template v-for="chip in getChips(3)"
         .chip.red v-if="chip === 1"
         .chip.yellow v-if="chip === 2"
+      .chip.chip-shadow.red v-if="turn === 1"
+      .chip.chip-shadow.yellow v-if="turn === 2"
     .col.g2 @click="makeMove(4)"
       template v-for="chip in getChips(4)"
         .chip.red v-if="chip === 1"
         .chip.yellow v-if="chip === 2"
+      .chip.chip-shadow.red v-if="turn === 1"
+      .chip.chip-shadow.yellow v-if="turn === 2"
     .col.g1 @click="makeMove(5)"
       template v-for="chip in getChips(5)"
         .chip.red v-if="chip === 1"
         .chip.yellow v-if="chip === 2"
+      .chip.chip-shadow.red v-if="turn === 1"
+      .chip.chip-shadow.yellow v-if="turn === 2"
     .col.g2 @click="makeMove(6)"
       template v-for="chip in getChips(6)"
         .chip.red v-if="chip === 1"
         .chip.yellow v-if="chip === 2"
+      .chip.chip-shadow.red v-if="turn === 1"
+      .chip.chip-shadow.yellow v-if="turn === 2"
     .col.g1 @click="makeMove(7)"
       template v-for="chip in getChips(7)"
         .chip.red v-if="chip === 1"
         .chip.yellow v-if="chip === 2"
+      .chip.chip-shadow.red v-if="turn === 1"
+      .chip.chip-shadow.yellow v-if="turn === 2"
 
 javascript:
   new Vue({
@@ -177,6 +200,7 @@ javascript:
           // set winner and game over
           that.winner = data.winner
           that.game_over = data.game_over
+          that.turn = data.current_players_turn
         })
       },
 
