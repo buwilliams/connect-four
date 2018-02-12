@@ -18,7 +18,7 @@ namespace :game do
   end
 
   task hard: :environment do
-    ai = BasicAi.new 3
+    ai = BasicAi.new 4
     c = ConnectFour.new(7, 6, ai)
     c.play
   end
