@@ -42,14 +42,17 @@ Interesting code lives:
 - [Connect Four in Vue.js](app/views/connect_four/index.html.slim)
 - [Tests](test/services)
 
-## Unfinished
+## Improvements
 
 - Persist games to database
+- Implement Alpha-Beta pruning to improve recursion costs
+- Add scoring for 2 and 3 matching groups that have a possible four slot win
+  or loss preferring the win
+- DRY BasicAi `.lookAhead()` and `.scoreBoard()` methods
 
 ## Known Bugs
 
-- AI: hard AI occasionally misses obvious blocks
-- AI: implementation of algorithm is slow, using pruning
+- AI: hard AI occasionally misses obvious blocks (better scoring solves this)
 
 ## Resources
 
