@@ -1,5 +1,5 @@
 class BasicAi
-  attr_accessor :depth, :board
+  attr_accessor :depth, :board, :loops
 
   NEUTRAL = 0
   WIN = 1000
@@ -7,6 +7,7 @@ class BasicAi
 
   def initialize(depth=0)
     @depth = depth
+    @loops = 0
   end
 
   # Steps:
@@ -15,6 +16,8 @@ class BasicAi
   # - arbitrary depth
 
   def move(game_board)
+    @loops = 0
+    
     if @depth == 0
       # makes a random move
       moves = game_board.available_moves
@@ -33,6 +36,7 @@ class BasicAi
     moves = game_board.available_moves
 
     scores = moves.map do |m|
+      @loops += 1
       cloned = clone_board(game_board)
       cloned.move(m)
 
@@ -55,6 +59,7 @@ class BasicAi
   end
 
   def score_board(game_board, is_maximizer, current_depth, max_depth=5)
+    @loops += 1
     moves = game_board.available_moves
     scores = moves.map do |m|
       cloned = clone_board(game_board)

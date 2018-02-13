@@ -20,6 +20,10 @@ class ConnectFour
       puts
       @board.paint
       puts "-" * @board.width * 3
+      unless @ai_player.nil?
+        puts "AI Loops: #{@ai_player.loops}"
+        puts "-" * @board.width * 3
+      end
       print "Player #{@board.turn}'s turn: "
       move_player
     end
