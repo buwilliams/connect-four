@@ -49,6 +49,9 @@ Interesting code:
 - Add scoring for 2 and 3 matching groups that have a possible four slot win
   or loss preferring the win
 - DRY BasicAi `.lookAhead()` and `.scoreBoard()` methods
+- Improve interface for Board.detect_win by creating a BoardState Class,
+- potentially add some sort of Coordinates Class to remove some of the
+  complexity of the Board class.
 
 ## Known Bugs
 
