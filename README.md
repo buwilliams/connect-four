@@ -32,7 +32,7 @@ you can paste `[1, 2, 1, 2, 1, 2, 1]` into any move to play those moves.
 - Run test suite by `rails test`
 - Start server by `rails s`
 
-Interesting code lives:
+Interesting code:
 
 - [Board](app/services/board.rb)
 - [BasicAi](app/services/basic_ai.rb)
