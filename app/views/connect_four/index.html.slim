@@ -151,7 +151,8 @@ javascript:
       moves: [],
       winner: null,
       turn: 1,
-      colCount: [0, 0, 0, 0, 0, 0]
+      colCount: [0, 0, 0, 0, 0, 0],
+      waitForServer: false
     },
 
     created: function() {},
@@ -174,6 +175,8 @@ javascript:
       },
 
       makeMove: function(slot) {
+        if(this.waitForServer) return
+        this.waitForServer = true
         var count = this.colCount[slot - 1]
         if(count >= 6) return
         this.colCount[slot - 1] += 1
@@ -209,6 +212,7 @@ javascript:
           } else {
             that.turn = data.current_players_turn
           }
+          that.waitForServer = false
         })
       },
 
