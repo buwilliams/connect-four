@@ -52,6 +52,7 @@ Interesting code:
 - Improve interface for Board.detect_win by creating a BoardState Class,
 - potentially add some sort of Coordinates Class to remove some of the
   complexity of the Board class.
+- Implement a AI version based on the [Monte Carlo Tree Search](https://en.wikipedia.org/wiki/Monte_Carlo_tree_search)
 
 ## Known Bugs
 
@@ -66,6 +67,7 @@ Interesting code:
 - [Negamax Variation](https://en.wikipedia.org/wiki/Negamax)
 - [Connect Four Example and Tutorial in C++](http://connect4.gamesolver.org/)
 - [Connect Four in JavaScript](https://www.roadtolarissa.com/javascript/connect-4-AI/)
+- [Monte Carlo Tree Search](https://en.wikipedia.org/wiki/Monte_Carlo_tree_search)
 
 ## Project Goals
 
