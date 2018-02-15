@@ -52,7 +52,7 @@ Interesting code:
 - Improve interface for Board.detect_win by creating a BoardState Class,
 - potentially add some sort of Coordinates Class to remove some of the
   complexity of the Board class.
-- Implement a AI version based on the [Monte Carlo Tree Search](https://en.wikipedia.org/wiki/Monte_Carlo_tree_search)
+- Implement an AI based on [Monte Carlo Tree Search](https://en.wikipedia.org/wiki/Monte_Carlo_tree_search)
 
 ## Known Bugs
 
